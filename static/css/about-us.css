@@ -1,0 +1,62 @@
+/* Content */
+.content{
+    margin-left: 7rem;
+    margin-right: 7rem;
+    margin-top: -10rem;
+    padding: 17rem 1.4rem 10%;
+}
+  
+.data h1{
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+  
+.wrap{
+    display: flex;
+    width: 50%;
+}
+  
+.wrap1{
+    width: 1px;
+    height: 100px;
+    border: 2px solid #111;
+}
+  
+.wrap2 .content-text{
+    margin-left: 10px;
+    font-size: 14px;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+  
+  .tuberculosis{
+    text-align: right;
+  }
+  
+  .tuberculosis h1{
+    font-size: 25px;
+  
+  }
+  
+  .tuberculosis h2{
+    font-size: 25px;
+    color: blue;
+  }
+  
+  .wrapping{
+    display: flex;
+    margin-left: 50%;
+    width: 50%;
+  }
+  
+  .wrapping1 .content-text-tbc{
+    font-size: 14px;
+    margin-right: 10px;
+    text-align: justify;
+  }
+  
+  .wrapping2{
+    width: 1px;
+    height: 140px;
+    border: 2px solid #111;
+  }

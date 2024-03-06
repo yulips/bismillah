@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skripsi.id | About Us</title>
+
+    <!-- My Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="../static/css/about-us.css" />
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">SKRIPSI</a>
+  
+        <div class="navbar-nav">
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('about') }}" target="_blank">About</a>
+          <a href="{{ url_for('dataset') }}">Dataset</a>
+        </div>
+  
+        <div class="navbar-extra">
+          <a href="#" id="search"><i data-feather="search"></i></a>
+          <a href="{{ url_for ('dashboard') }}" id="user"><i data-feather="user"></i></a>
+          <a href="#" id="menu"><i data-feather="menu"></i></a>
+        </div>
+      </nav>
+    <!-- Navbar End -->
+    
+    <!-- Content Start -->
+    <section class="content" id="content">
+      <div class="data">
+        <h1>Data Mining</h1>
+
+        <div class="wrap">
+          <div class="wrap1">
+          </div>
+          <div class="wrap2">
+            <p class="content-text">
+              Data mining merupakan suatu proses dari pengumpulan dan pengolahan data yang memiliki tujuan
+              untuk memperoleh informasi yang penting dari data yang digunakan. Metode data mining dapat
+              digunakan pada dunia kesehatan dalam pembuatan modal untuk memprediksi dan mengklasifikasi 
+              mengenai permasalahan kesehatan yang sedang dihadapi. 
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tuberculosis">
+        <h1>Taukah Kamu?</h1>
+
+        <h2>Mengenai Penyakit Tuberculosis</h2>
+
+        <div class="wrapping">
+          <div class="wrapping1">
+            <p class="content-text-tbc">
+              Penyakit Tuberculosus ditemukan pada tanggal 24 Maret 1882, seorang ilmuwan bernama Dr. Robert Koch mengumumkan penemuan 
+              bakteri bernama Mycobacterium tuberculosis. Tuberkulosis (TBC) merupakan salah satu penyakit menular yang disebabkan oleh 
+              infeksi bakteri bernama virus Mycobacterium Tuberculosis. Penyakit ini menyerang organ pernapasan paru-paru dan sebagian 
+              dapat menyerang organ diluar paru seperti kelenjar getah bening, dan selaput otak.
+            </p>
+          </div>
+          <div class="wrapping2">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Content End -->
+
+    <!-- Footer Start -->
+    <footer>
+        <div class="sosial">
+          <a href=""><i data-feather="instagram"></i></a>
+          <a href=""><i data-feather="twitter"></i></a>
+          <a href=""><i data-feather="facebook"></i></a>
+        </div>
+  
+        <div class="links">
+          <a href="#home">Home</a>
+          <a href="about-us.html">About</a>
+          <a href="#daftar">Menu</a>
+          <a href="#kontak">Kontak</a>
+        </div>
+  
+        <div class="credit">
+          <p>Created by <a href=""> Yuliana Putri </a> | &copy; 2023</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Icons -->
+    <script>
+        feather.replace();
+    </script>
+  
+    <!--Javascript-->
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
