@@ -1,13 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 import pickle
-import numpy as np
 import os
-import pandas as pd 
+import pandas as pd
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 #KNN
-# Membuka file pickle dan memuat data knn
-with open('./knn/data_file.pkl', 'rb') as f:
-    loaded_data = pickle.load(f)
 
 # Membuka file pickle untuk akurasi knn
 with open('./knn/akurasiakhir-knn.pkl', 'rb') as f1:
@@ -31,16 +29,14 @@ with open('./knnpca/akurasiakhirgab.pkl', 'rb') as f5:
 with open('./knnpca/cfreportgab.pkl', 'rb') as f6:
     classification_report_str = pickle.load(f6)
 
-    
-# Extract path gambar dan dataframe fitur dari data yang dimuat
-#confusion_matrix_path = loaded_data['./knnpca/conmat-gab.png']
-
 # Inisialisasi classification_report dengan string kosong
 classification_report = loaded_data.get('classification_report', '')
 
-# Load the KNN model
-prediksi = './knnpca/tbc-gab.pkl'
-model = pickle.load(open(prediksi, 'rb'))
+# Load Model
+scaler = pickle.load(open('./models/scaler.pkl', 'rb'))
+pca = pickle.load(open('./models/pca.pkl', 'rb'))
+le = pickle.load(open('./models/label_encoder.pkl', 'rb'))
+model = pickle.load(open('./models/model.pkl', 'rb'))
 
 # Inisialisasi objek Flask
 app = Flask(__name__, template_folder='frontend', static_folder='static')
@@ -82,31 +78,35 @@ def dataset():
 def predict():
     if request.method == 'POST':
         try:
-            # Extracting form values
-            name = str(request.form.get('name'))
-            sex = int(request.form.get('sex'))
-            age = int(request.form.get('age'))
-            coufor = float(request.form['coufor'])
-            nisw = float(request.form.get('nisw'))  
-            welos = float(request.form.get('welos'))
-            loap = float(request.form['loap'])
-            tbch = float(request.form.get('tbch'))
-            coph = float(request.form['coph'])
-            thal = float(request.form.get('thal'))
-            cb = float(request.form['cb'])
-            bcg = float(request.form.get('bcg'))
-            ltaa = float(request.form['ltaa'])
-            
-            # Creating a NumPy array for the input data
-            data = np.array([[name, sex, age, coufor, nisw, welos, loap, tbch, coph, thal, cb, bcg, ltaa]])
+            form_values = request.form.to_dict()
 
-            # Predict the class and probabilities
-            predicted_class = model.predict(data)
-            probabilities = model.predict_proba(data)
-            predicted_prob = probabilities[0][predicted_class[0]]
+            data = {}
+
+            data = {key: [float(value)] if value.replace('.', '', 1).isdigit() else value for key, value in form_values.items()}
+
+            # Membuat data kedalam bentuk dataframe
+            df = pd.DataFrame(data)
+
+            # Melakukan one-hot encoding (pre-processing) untuk kolom 'sex'
+            df['laki-laki'] = df['sex'].apply(lambda x: 1 if x == 'Male' else 0)
+            df['perempuan'] = df['sex'].apply(lambda x: 1 if x == 'Female' else 0)
+            # Menghapus kolom 'sex' yang asli
+            df.drop('sex', axis=1, inplace=True)
+            # Mengurutkan kolom 'laki-laki' dan 'perempuan' ke depan DataFrame
+            df = df.reindex(columns=['perempuan', 'laki-laki'] + [col for col in df.columns if col not in ['perempuan', 'laki-laki']])
+
+            # Mengubah data ke dalam scaler
+            new_data_std = scaler.transform(df)
+            # Mentransformasi jumlah komponen sesuai PCA
+            new_data_pca = pca.transform(new_data_std)
+
+            # Prediksi hasil
+            prediction = model.predict(new_data_pca)
+            predicted_class = prediction[0]
+            predicted_class_original = le.inverse_transform([predicted_class])[0]
 
             # Return prediction as JSON
-            return jsonify({'Predicted Class': predicted_class.tolist(), 'Accuracy': predicted_prob})
+            return jsonify(predicted_class_original)
 
         except Exception as e:
             return {"error": str(e)}
@@ -121,7 +121,7 @@ def confusion():
     # Membuka file pickle untuk classification report knn
     with open('./knn/cfreport-knn.pkl', 'rb') as f2:
         classification_report = pickle.load(f2)
-
+    
     # Membuka file pickle untuk akurasi
     with open('./knnpca/akurasiakhirgab.pkl', 'rb') as f5:
         accuracy = pickle.load(f5)
@@ -130,20 +130,7 @@ def confusion():
     with open('./knnpca/cfreportgab.pkl', 'rb') as f6:
         classification_report_str = pickle.load(f6)
 
-    return render_template('confusion_matrix.html', akurasi=akurasi, classification_report=classification_report ,accuracy=accuracy, classification_report_str=classification_report_str, css_file='css/boostrap.min.css')
-
-@app.route('/gambarcm', methods=['POST'])
-def gambarcm():
-    if request.method == 'POST':
-        try:
-            # Menggunakan jsonify untuk mengirimkan path gambar dan data tabel ke HTML
-            return jsonify({
-                #'confusion_matrix': confusion_matrix_path,
-            })
-
-        except Exception as e:
-            return {"error": str(e)}
-
+    return render_template('confusion_matrix.html', akurasi=akurasi, classification_report=classification_report, accuracy=accuracy, classification_report_str=classification_report_str, css_file='css/boostrap.min.css')
 
 if __name__ == '__main__':
     app.run(debug=True)

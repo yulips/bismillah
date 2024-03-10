@@ -181,10 +181,10 @@
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs sticky-tab" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active" id="dataset-asli-tab" data-toggle="tab" href="#dataset-asli" role="tab">Dataset Asli</a>
+                                                    <a class="nav-link active" id="dataset-asli-tab" data-bs-toggle="tab" href="#dataset-asli" role="tab">Dataset Asli</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="dataset-preprocessing-tab" data-toggle="tab" href="#dataset-preprocessing" role="tab">Dataset Preprocessing</a>
+                                                    <a class="nav-link" id="dataset-preprocessing-tab" data-bs-toggle="tab" href="#dataset-preprocessing" role="tab">Dataset Preprocessing</a>
                                                 </li>
                                             </ul>
                                 
@@ -240,6 +240,7 @@
                                                                     <th scope="col">No</th> 
                                                                     <th scope="col">Sex</th>
                                                                     <th scope="col">Age</th>
+                                                                    <th scope="col">Cough for two weeks</th>
                                                                     <th scope="col">Night sweats</th>
                                                                     <th scope="col">Weight loss</th>		
                                                                     <th scope="col">Loss of appetite</th>
@@ -256,18 +257,18 @@
                                                                 {% for index, row in df_tbc_baru.iterrows() %}
                                                                 <tr>
                                                                     <th scope="row">{{ index + 1 }}</th>
-                                                                    <td>{{ row['laki-laki'] }}</td>	
-                                                                    <td>{{ row['perempuan'] }}</td>	
-                                                                    <td>{{ row['age'] }}</td>
-                                                                    <td>{{ row['night sweats'] }}</td>
-                                                                    <td>{{ row['weight loss'] }}</td>
-                                                                    <td>{{ row['loss of appetite'] }}</td>
-                                                                    <td>{{ row['TB contact history'] }}</td>
-                                                                    <td>{{ row['cough with phlegm'] }}</td>	
-                                                                    <td>{{ row['coughing blood'] }}</td>
-                                                                    <td>{{ row['BCG results appear fast'] }}</td>
-                                                                    <td>{{ row['lumps that appear around the armpits and neck'] }}</td>
-                                                                    <td>{{ row['result'] }}</td>
+                                                                    <td>{{ row['0'] }}</td>
+                                                                    <td>{{ row['1'] }}</td>
+                                                                    <td>{{ row['2'] }}</td>
+                                                                    <td>{{ row['3'] }}</td>
+                                                                    <td>{{ row['4'] }}</td>
+                                                                    <td>{{ row['5'] }}</td>
+                                                                    <td>{{ row['6'] }}</td>
+                                                                    <td>{{ row['7'] }}</td>	
+                                                                    <td>{{ row['8'] }}</td>
+                                                                    <td>{{ row['9'] }}</td>
+                                                                    <td>{{ row['10'] }}</td>
+                                                                    <td>{{ row['11'] }}</td>
                                                                 </tr>
                                                                 {% endfor %}
                                                             </tbody>
@@ -312,8 +313,8 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="../frontend/src/lib/chart/chart.min.js"></script>
-    <script src="../frontend/src/lib/easing/easing.min.js"></script>
     <script src="../frontend/src/lib/waypoints/waypoints.min.js"></script>
     <script src="../frontend/src/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="../frontend/src/lib/tempusdominus/js/moment.min.js"></script>

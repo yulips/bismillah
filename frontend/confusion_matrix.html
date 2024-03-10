@@ -176,7 +176,7 @@
 								</div>
 								<div class="card-body">
 									<!-- Menampilkan gambar Confusion Matrix -->
-									<img id="confusionMatrix" alt="Confusion Matrix" style="max-width: 100%; height: auto;">
+									<img src="{{ url_for('static', filename='img/confusion_matrix/conmat-knn.png') }}" alt="Confusion Matrix" style="width: auto; height: 400px;">
 								</div>
 							</div>
 						</div>
@@ -214,7 +214,7 @@
                                 </div>
                                 <div class="card-body">
                                     <!-- Menampilkan gambar Confusion Matrix -->
-                                    <img id="confusionMatrixgab" alt="Confusion Matrix" style="max-width: 100%; height: auto;">
+                                    <img src="{{ url_for('static', filename='img/confusion_matrix/conmat-gab.png') }}" alt="Confusion Matrix" style="width: auto; height: 400px;">
                                 </div>
                             </div>
 
@@ -280,22 +280,6 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- JavaScript untuk memuat gambar dan tabel -->
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			// Menggunakan fetch untuk meminta data dari server
-			fetch('/gambarcm', {
-				method: 'POST',
-			})
-			.then(response => response.json())
-			.then(data => {
-				// Menampilkan gambar Confusion Matrix
-				document.getElementById('confusionMatrixgab').setAttribute('src', data.confusion_matrix);
-			})
-			.catch(error => console.error("Error:", error));
-		});
-	</script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -340,8 +324,8 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="../frontend/src/lib/chart/chart.min.js"></script>
-    <script src="../frontend/src/lib/easing/easing.min.js"></script>
     <script src="../frontend/src/lib/waypoints/waypoints.min.js"></script>
     <script src="../frontend/src/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="../frontend/src/lib/tempusdominus/js/moment.min.js"></script>
